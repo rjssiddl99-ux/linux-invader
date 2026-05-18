@@ -57,13 +57,25 @@ func _physics_process(_delta):
 
 # 총알을 생성하고 정면(왼쪽)으로 발사하는 함수
 func shoot():
-	if bullet_scene:
+	# 1. 현재 씬 트리에서 "player" 그룹에 속한 첫 번째 노드(플레이어)를 찾음
+	var player = get_tree().get_first_node_in_group("player")
+	
+	if player and bullet_scene:
 		var bullet = bullet_scene.instantiate()
 		get_tree().current_scene.add_child(bullet)
 		
+		# 총알의 시작 위치는 나의 위치
 		bullet.global_position = global_position
-		# 플레이어 위치와 상관없이 무조건 왼쪽(Vector2.LEFT)으로 발사
-		bullet.direction = Vector2.LEFT
+		
+		# 2. [핵심] 나의 위치에서 플레이어 위치로 향하는 '방향 벡터' 계산
+		var target_direction = global_position.direction_to(player.global_position)
+		
+		# 3. 총알에 계산된 방향을 전달 (기존 총알 스크립트가 이 방향으로 날아감)
+		bullet.direction = target_direction
+		
+		# 4. [선택] 총알 이미지가 정면(플레이어)을 바라보도록 회전시킴
+		# 벡터의 angle() 함수를 쓰면 해당 방향의 라디안 각도를 바로 구해줘!
+		bullet.rotation = target_direction.angle()
 
 func _on_attack_timer_timeout() -> void:
 	shoot()
