@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://b4266ugkdkf8a"]
+
+[ext_resource type="Script" uid="uid://b10y7yehowv8y" path="res://enemy_dash.gd" id="1_rkdyc"]
+[ext_resource type="Texture2D" uid="uid://bcem6drg8ke8p" path="res://리눅스_적_이미지.png" id="3_8sani"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qi2p4"]
+radius = 31.0
+height = 62.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iifgy"]
+radius = 40.000004
+height = 89.52382
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_epg4t"]
+radius = 41.43131
+
+[node name="Enemy" type="CharacterBody2D" unique_id=42983241]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_rkdyc")
+health = 3
+speed = 200.0
+stop_x_position = 950.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1587816819]
+modulate = Color(0.2784314, 0.35686275, 1, 1)
+position = Vector2(5, 4)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_8sani")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1851701100]
+shape = SubResource("CapsuleShape2D_qi2p4")
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=499917946]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=628558373]
+position = Vector2(4.0000005, 7.000001)
+scale = Vector2(1.05, 1.05)
+shape = SubResource("CapsuleShape2D_iifgy")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1347501038]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=321919160]
+position = Vector2(2.5000038, 5.5)
+scale = Vector2(1.05, 1.05)
+shape = SubResource("CircleShape2D_epg4t")
+
+[node name="DashTimer" type="Timer" parent="." unique_id=1487742784]
+wait_time = 3.5
+autostart = true
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
