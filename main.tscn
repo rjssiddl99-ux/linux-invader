@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://c2d8ogwbkvyy8" path="res://enemy_spawner.gd" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://ujdfg50v1kax" path="res://enemy_shotgun.tscn" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://b4266ugkdkf8a" path="res://enemy_dash.tscn" id="6_7mycd"]
+[ext_resource type="Script" uid="uid://bx7y76x4sq6vg" path="res://score_manager.gd" id="7_272bh"]
+[ext_resource type="Script" uid="uid://dttexqscl1shi" path="res://score_label.gd" id="8_5vw27"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
 size = Vector2(52, 32)
@@ -34,8 +36,17 @@ script = ExtResource("4_1bvp3")
 enemy_scenes = Array[PackedScene]([ExtResource("2_1bvp3"), ExtResource("5_lquwl"), ExtResource("6_7mycd")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1513360273]
+script = ExtResource("7_272bh")
 
 [node name="HeartContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=413324462]
 unique_name_in_owner = true
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=1096621620]
+offset_left = 996.0
+offset_top = 19.0
+offset_right = 1036.0
+offset_bottom = 42.0
+horizontal_alignment = 2
+script = ExtResource("8_5vw27")

@@ -52,8 +52,11 @@ func take_damage(amount: int):
 		die() 
 
 func die():
-	queue_free() 
-
+	# 주소창(get_node) 없이 싱글톤 이름으로 바로 점수를 올립니다.
+	ScoreManager.add_score(150)
+	
+	queue_free()
+	
 func _on_hitbox_body_entered(body: Node2D) -> void:
 	# 플레이어 몸체(CharacterBody2D)와 충돌했을 때 
 	if body.is_in_group("player"):

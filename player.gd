@@ -66,3 +66,9 @@ func take_damage(amount):
 func die():
 	print("게임 오버!")
 	get_tree().call_deferred("reload_current_scene")
+
+	# 플레이어가 죽는 순간 터미널 출력 + 점수 초기화 실행!
+	ScoreManager.reset_score()
+	
+	# 기존에 있던 캐릭터 삭제나 게임오버 씬 전환 코드
+	queue_free()
