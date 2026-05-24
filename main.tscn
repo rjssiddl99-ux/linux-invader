@@ -1,15 +1,18 @@
 [gd_scene format=3 uid="uid://b7tjh0cogfs6v"]
 
 [ext_resource type="Script" uid="uid://cgoq8ra0j6pti" path="res://player.gd" id="1_1bvp3"]
-[ext_resource type="Texture2D" uid="uid://byjgybarfjby0" path="res://icon.svg" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://j1r0lal38rix" path="res://enemy.tscn" id="2_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://bevxibex3y4b5" path="res://Player.png" id="2_7mycd"]
 [ext_resource type="Script" uid="uid://c2d8ogwbkvyy8" path="res://enemy_spawner.gd" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://ujdfg50v1kax" path="res://enemy_shotgun.tscn" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://b4266ugkdkf8a" path="res://enemy_dash.tscn" id="6_7mycd"]
-[ext_resource type="PackedScene" uid="uid://cbyh0jym8ak04" path="res://enemy_sniper.tscn" id="7_272bh"]
+[ext_resource type="Script" uid="uid://bx7y76x4sq6vg" path="res://score_manager.gd" id="7_272bh"]
+[ext_resource type="PackedScene" uid="uid://cbyh0jym8ak04" path="res://enemy_sniper.tscn" id="7_kek77"]
+[ext_resource type="PackedScene" uid="uid://dr5ljoicy0t23" path="res://enemy_firewall.tscn" id="8_4c57u"]
+[ext_resource type="Script" uid="uid://dttexqscl1shi" path="res://score_label.gd" id="8_5vw27"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
-size = Vector2(31, 34)
+size = Vector2(52, 32)
 
 [node name="main" type="Node2D" unique_id=275539009]
 
@@ -18,11 +21,12 @@ position = Vector2(100, 270)
 script = ExtResource("1_1bvp3")
 
 [node name="Sprite2D" type="Sprite2D" parent="player" unique_id=2035816026]
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("1_h2yge")
+position = Vector2(7.899995, 9.1499815)
+scale = Vector2(0.22734375, 0.21757814)
+texture = ExtResource("2_7mycd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player" unique_id=840698826]
-position = Vector2(0, -1)
+position = Vector2(7, 8)
 shape = SubResource("RectangleShape2D_1bvp3")
 
 [node name="ShotTimer" type="Timer" parent="player" unique_id=936381401]
@@ -31,23 +35,20 @@ one_shot = true
 
 [node name="EnemySpawner" type="Node2D" parent="." unique_id=2076833067]
 script = ExtResource("4_1bvp3")
-enemy_scenes = Array[PackedScene]([ExtResource("2_1bvp3"), ExtResource("5_lquwl"), ExtResource("6_7mycd"), ExtResource("7_272bh")])
+enemy_scenes = Array[PackedScene]([ExtResource("2_1bvp3"), ExtResource("5_lquwl"), ExtResource("6_7mycd"), ExtResource("7_kek77"), ExtResource("8_4c57u")])
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1513360273]
+script = ExtResource("7_272bh")
 
-[node name="HealthBar" type="ProgressBar" parent="CanvasLayer" unique_id=1818512805]
-offset_left = 11.0
-offset_top = 3.0
-offset_right = 134.0
-offset_bottom = 43.0
-max_value = 5.0
-step = 1.0
-value = 5.0
-show_percentage = false
+[node name="HeartContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=413324462]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Label" type="Label" parent="CanvasLayer/HealthBar" unique_id=1469024040]
-layout_mode = 0
-offset_left = 57.0
-offset_top = 4.0
-offset_right = 114.0
-offset_bottom = 36.0
+[node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=1096621620]
+offset_left = 996.0
+offset_top = 19.0
+offset_right = 1036.0
+offset_bottom = 42.0
+horizontal_alignment = 2
+script = ExtResource("8_5vw27")

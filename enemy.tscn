@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bd6hmigu4m6vr" path="res://enemy.gd" id="1_4gyqm"]
 [ext_resource type="PackedScene" uid="uid://6coan5u3qiss" path="res://enemy_bullet.tscn" id="2_iifgy"]
-[ext_resource type="Texture2D" uid="uid://bcem6drg8ke8p" path="res://리눅스_적_이미지.png" id="3_qi2p4"]
+[ext_resource type="Texture2D" uid="uid://ecprqqwgc0gv" path="res://linux_enemy.png" id="3_qi2p4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qi2p4"]
 radius = 31.0

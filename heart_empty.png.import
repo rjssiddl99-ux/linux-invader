@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcem6drg8ke8p"
-path="res://.godot/imported/리눅스_적_이미지.png-0d0215f5003f4f3facf150c7913d07a5.ctex"
+uid="uid://cvvrfd4qg6280"
+path="res://.godot/imported/heart_empty.png-dcf9f940b3e6ab582f77f891ee440059.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://리눅스_적_이미지.png"
-dest_files=["res://.godot/imported/리눅스_적_이미지.png-0d0215f5003f4f3facf150c7913d07a5.ctex"]
+source_file="res://heart_empty.png"
+dest_files=["res://.godot/imported/heart_empty.png-dcf9f940b3e6ab582f77f891ee440059.ctex"]
 
 [params]
 

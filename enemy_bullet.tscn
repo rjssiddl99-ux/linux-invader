@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://6coan5u3qiss"]
 
 [ext_resource type="Script" uid="uid://cgy2fswl6xrp5" path="res://enemy_bullet.gd" id="1_gl7bs"]
-[ext_resource type="Texture2D" uid="uid://nsv0cqt05vqd" path="res://리눅스_총알_이미지.png" id="2_gl7bs"]
+[ext_resource type="Texture2D" uid="uid://x6gdr83pahp4" path="res://linux_enemy_bullet.png" id="2_gl7bs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gl7bs"]
 size = Vector2(140, 90)

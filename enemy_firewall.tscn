@@ -1,8 +1,7 @@
-[gd_scene format=3 uid="uid://cbyh0jym8ak04"]
+[gd_scene format=3 uid="uid://dr5ljoicy0t23"]
 
-[ext_resource type="Script" uid="uid://dbu1sldgfpadg" path="res://enemy_sniper.gd" id="1_hm1en"]
-[ext_resource type="PackedScene" uid="uid://6coan5u3qiss" path="res://enemy_bullet.tscn" id="2_lvb0a"]
-[ext_resource type="Texture2D" uid="uid://ecprqqwgc0gv" path="res://linux_enemy.png" id="3_3f205"]
+[ext_resource type="Script" uid="uid://ddyu5jvk6m50w" path="res://enemy_firewall.gd" id="1_owrhm"]
+[ext_resource type="Texture2D" uid="uid://ecprqqwgc0gv" path="res://linux_enemy.png" id="2_owrhm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qi2p4"]
 radius = 31.0
@@ -10,27 +9,26 @@ height = 62.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iifgy"]
 radius = 35.2381
-height = 91.42858
+height = 146.66669
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_epg4t"]
-radius = 55.110695
+radius = 71.90634
 
 [node name="Enemy" type="CharacterBody2D" unique_id=42983241]
-modulate = Color(0, 1, 0, 1)
 collision_layer = 2
-script = ExtResource("1_hm1en")
-bullet_scene = ExtResource("2_lvb0a")
+script = ExtResource("1_owrhm")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1587816819]
-modulate = Color(0, 1, 0, 1)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_3f205")
+modulate = Color(0.53333336, 0, 1, 1)
+position = Vector2(0.9999981, 0.5000038)
+scale = Vector2(0.26953125, 0.70703125)
+texture = ExtResource("2_owrhm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1851701100]
 shape = SubResource("CapsuleShape2D_qi2p4")
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=2141145761]
-wait_time = 4.0
+wait_time = 1.5
 autostart = true
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=499917946]

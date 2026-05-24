@@ -1,18 +1,17 @@
 [gd_scene format=3 uid="uid://b4266ugkdkf8a"]
 
 [ext_resource type="Script" uid="uid://b10y7yehowv8y" path="res://enemy_dash.gd" id="1_rkdyc"]
-[ext_resource type="Texture2D" uid="uid://bcem6drg8ke8p" path="res://리눅스_적_이미지.png" id="3_8sani"]
+[ext_resource type="Texture2D" uid="uid://cdpxbqamun34v" path="res://linux_enemy_dash.png" id="2_rkdyc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qi2p4"]
-radius = 31.0
-height = 62.0
+radius = 22.0
+height = 44.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iifgy"]
-radius = 40.000004
-height = 89.52382
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gi6tg"]
+size = Vector2(93.33334, 55.2381)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_epg4t"]
-radius = 41.43131
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i4g6g"]
+size = Vector2(98.095245, 60.000008)
 
 [node name="Enemy" type="CharacterBody2D" unique_id=42983241]
 collision_layer = 2
@@ -23,30 +22,31 @@ speed = 200.0
 stop_x_position = 950.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1587816819]
-modulate = Color(0.2784314, 0.35686275, 1, 1)
-position = Vector2(5, 4)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("3_8sani")
+position = Vector2(4.7683716e-07, 2.3841858e-07)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("2_rkdyc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1851701100]
+position = Vector2(0, 7)
 shape = SubResource("CapsuleShape2D_qi2p4")
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=499917946]
+position = Vector2(-4, -3)
 collision_layer = 2
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=628558373]
-position = Vector2(4.0000005, 7.000001)
+position = Vector2(2.9999979, 13)
 scale = Vector2(1.05, 1.05)
-shape = SubResource("CapsuleShape2D_iifgy")
+shape = SubResource("RectangleShape2D_gi6tg")
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=1347501038]
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=321919160]
-position = Vector2(2.5000038, 5.5)
+position = Vector2(-0.49999833, 9.499999)
 scale = Vector2(1.05, 1.05)
-shape = SubResource("CircleShape2D_epg4t")
+shape = SubResource("RectangleShape2D_i4g6g")
 
 [node name="DashTimer" type="Timer" parent="." unique_id=1487742784]
 wait_time = 3.5

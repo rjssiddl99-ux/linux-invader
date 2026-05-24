@@ -2,39 +2,48 @@ extends CharacterBody2D
 
 @export var speed = 400
 @export var health = 5
+@export var max_health = 5 # 최대 체력 변수를 따로 하나 파두는 게 좋습니다!
 @export var bullet_scene : PackedScene = preload("res://Bullet.tscn")
 
+# 하트 이미지 미리 불러오기 (본인의 실제 파일 경로로 맞춰주세요)
+var heart_full = preload("res://heart_full.png")
+var heart_empty = preload("res://heart_empty.png")
+
 @onready var shot_timer = $ShotTimer
-@onready var health_bar = get_parent().get_node("CanvasLayer/HealthBar")
-@onready var health_label = get_parent().get_node("CanvasLayer/HealthBar/Label")
+@onready var heart_container = %HeartContainer # HBoxContainer 연결
+
 func _ready():
-	setup_health_bar()
 	update_ui()
 
-func setup_health_bar():
-	if health_bar:
-		health_bar.min_value = 0
-		health_bar.max_value = health
-		health_bar.value = health
-		health_bar.show_percentage = false
-		
-		# 코드로 빨간색 입히기
-		var sb = StyleBoxFlat.new()
-		sb.bg_color = Color.RED
-		health_bar.add_theme_stylebox_override("fill", sb)
-
 func update_ui():
-	if health_bar:
-		health_bar.value = health
-	if health_label:
-		# 현재 체력을 5, 4, 3 처럼 숫자로 표시
-		health_label.text = str(health)
+	if not heart_container:
+		return
+		
+	# 1. 기존에 생성되어 있던 하트 노드들을 싹 지우고 새로 그립니다.
+	for child in heart_container.get_children():
+		child.queue_free()
+	
+	# 2. 최대 체력만큼 하트 아이콘(TextureRect)을 새로 생성합니다.
+	for i in range(max_health):
+		var heart = TextureRect.new()
+		
+		# 현재 인덱스(i)가 남은 체력(health)보다 작으면 빨간 하트, 크거나 같으면 검은 하트
+		if i < health:
+			heart.texture = heart_full
+		else:
+			heart.texture = heart_empty
+			
+		# 하트 크기가 너무 크다면 코드나 에디터에서 조절 가능합니다.
+		heart.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		heart.custom_minimum_size = Vector2(50, 50) # 하트 한 개 크기 (원하는 대로 조절)
+		
+		heart_container.add_child(heart)
 
 func _physics_process(_delta):
 	var direction = Input.get_axis("up", "down")
 	velocity.y = direction * speed
 	move_and_slide()
-	
+	global_position.y = clamp(global_position.y, 40, 530)
 	if Input.is_action_just_pressed("shot") and shot_timer.is_stopped():
 		shoot()
 
@@ -44,12 +53,12 @@ func shoot():
 	bullet.global_position = global_position
 	shot_timer.start()
 
-
 func take_damage(amount):
-	health -= amount
+	# 체력이 0 미만으로 내려가지 않도록 방지
+	health = max(0, health - amount)
 	print("플레이어 체력: ", health)
 	
-	update_ui()
+	update_ui() # 하트 상태 갱신
 		
 	if health <= 0:
 		die()
@@ -57,3 +66,9 @@ func take_damage(amount):
 func die():
 	print("게임 오버!")
 	get_tree().call_deferred("reload_current_scene")
+
+	# 플레이어가 죽는 순간 터미널 출력 + 점수 초기화 실행!
+	ScoreManager.reset_score()
+	
+	# 기존에 있던 캐릭터 삭제나 게임오버 씬 전환 코드
+	queue_free()
