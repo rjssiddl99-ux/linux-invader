@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://dr5ljoicy0t23"]
+
+[ext_resource type="Script" uid="uid://ddyu5jvk6m50w" path="res://enemy_firewall.gd" id="1_owrhm"]
+[ext_resource type="Texture2D" uid="uid://ecprqqwgc0gv" path="res://linux_enemy.png" id="2_owrhm"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qi2p4"]
+radius = 31.0
+height = 62.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iifgy"]
+radius = 35.2381
+height = 146.66669
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_epg4t"]
+radius = 71.90634
+
+[node name="Enemy" type="CharacterBody2D" unique_id=42983241]
+collision_layer = 2
+script = ExtResource("1_owrhm")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1587816819]
+modulate = Color(0.53333336, 0, 1, 1)
+position = Vector2(0.9999981, 0.5000038)
+scale = Vector2(0.26953125, 0.70703125)
+texture = ExtResource("2_owrhm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1851701100]
+shape = SubResource("CapsuleShape2D_qi2p4")
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=2141145761]
+wait_time = 1.5
+autostart = true
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=499917946]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=628558373]
+scale = Vector2(1.05, 1.05)
+shape = SubResource("CapsuleShape2D_iifgy")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=1347501038]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=321919160]
+position = Vector2(2.5000038, 5.5)
+scale = Vector2(1.05, 1.05)
+shape = SubResource("CircleShape2D_epg4t")
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
