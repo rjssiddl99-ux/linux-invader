@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://beb72y7k2iim7"]
+
+[node name="Test_Ingame" type="Node2D" unique_id=1257482011]
+
+[node name="Label" type="Label" parent="." unique_id=756303310]
+anchors_preset = -1
+offset_left = 430.0
+offset_top = 281.0
+offset_right = 527.0
+offset_bottom = 304.0
+text = "Test_Ingame"
